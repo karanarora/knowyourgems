@@ -30,7 +30,7 @@ Or install it yourself as:
 
   2) Lists no. of gems you own, just provide your rubygems handle
 
-	  Knowyourgems.name_of_your_gems “karanarora"
+	  Knowyourgems.your_total_gems “karanarora"
       	  
       ==> 2
 
