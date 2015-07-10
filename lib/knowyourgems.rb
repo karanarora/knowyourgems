@@ -1,17 +1,26 @@
 require "knowyourgems/version"
 require "net/http"
 require 'json'
+require 'time'
 
 module Knowyourgems
   class << self
     def name_of_your_gems user_handle
       response, valid = gems_api_common user_handle
-      response.collect!{|r| r['name']} if valid
+      if valid
+        response.collect!{|r| r['name']}
+      else
+        response
+      end
     end
 
     def your_total_gems user_handle
       response, valid = gems_api_common user_handle
-      response.count if valid
+      if valid
+        response.count
+      else
+        response
+      end
     end
 
     def http_response service
@@ -26,8 +35,23 @@ module Knowyourgems
       return response,valid
     end
 
+    def last_updated gem
+      url = versions_api gem
+      response = http_response url
+      response, valid = valid_response? response
+      if valid
+        ((DateTime.now - DateTime.parse(response.first['built_at'])).to_i).to_s + ' days'
+      else
+        response
+      end
+    end
+
     def gem_api user_handle
       "https://rubygems.org/api/v1/owners/#{user_handle}/gems.json"
+    end
+
+    def versions_api gem
+      "https://rubygems.org/api/v1/versions/#{gem}.json"
     end
 
     def valid_response? response

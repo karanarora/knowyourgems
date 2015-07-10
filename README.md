@@ -25,14 +25,20 @@ Or install it yourself as:
   1) Lists all the gems you own, just provide your rubygems handle
 
 	  Knowyourgems.name_of_your_gems “karanarora"
-	  
-	  ==> ["hash_multi_tool", "knowyourgems"]
+
+      ==> ["hash_multi_tool", "knowyourgems"]
 
   2) Lists no. of gems you own, just provide your rubygems handle
 
 	  Knowyourgems.your_total_gems “karanarora"
-      	  
+
       ==> 2
+
+  3) Find when you updated your last gem:
+
+    Knowyourgems.last_updated "hash_multi_tool"
+
+      ==> "2 days"
 
 ## Development
 
@@ -52,4 +58,3 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
