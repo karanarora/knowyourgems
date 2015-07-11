@@ -53,8 +53,8 @@ Or install it yourself as:
     Knowyourgems.popular_version 'hash_multi_tool', 2
 
       ==> [
-            {:version=>"0.1.5", :authors=>"Prabhat Thapa", :created_at=>"2015-07-08T00:00:00.000Z", :downloads_count=>195},
-            {:version=>"0.1.5", :authors=>"Prabhat Thapa", :created_at=>"2015-07-08T00:00:00.000Z", :downloads_count=>195}
+            {:version=>"0.1.5", :authors=>"Prabhat Thapa", :created_at=>"2015-07-08T00:00:00.000Z", :downloads_count=>195}, 
+            {:version=>"0.1.4", :authors=>"Prabhat Thapa", :created_at=>"2015-07-08T00:00:00.000Z", :downloads_count=>168}
           ]
 
 ## Development
