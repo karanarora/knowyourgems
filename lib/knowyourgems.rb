@@ -53,10 +53,6 @@ module Knowyourgems
       end
     end
 
-    def gem_api user_handle
-      "https://rubygems.org/api/v1/owners/#{user_handle}/gems.json"
-    end
-
     def popular_versions gem_name, count = 1
       response, valid = versions_detail gem_name
       if valid
