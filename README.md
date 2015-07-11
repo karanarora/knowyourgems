@@ -44,13 +44,13 @@ Or install it yourself as:
 
   4) Find the most popular version of your gem:
 
-    Knowyourgems.popular_version 'hash_multi_tool'
+    Knowyourgems.popular_versions 'hash_multi_tool'
 
       ==> [{:version=>"0.1.5", :authors=>"Prabhat Thapa", :created_at=>"2015-07-08T00:00:00.000Z", :downloads_count=>195}]
 
   5) Find the top 2 popular versions of your gem:
 
-    Knowyourgems.popular_version 'hash_multi_tool', 2
+    Knowyourgems.popular_versions 'hash_multi_tool', 2
 
       ==> [
             {:version=>"0.1.5", :authors=>"Prabhat Thapa", :created_at=>"2015-07-08T00:00:00.000Z", :downloads_count=>195}, 
