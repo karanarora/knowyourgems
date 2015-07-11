@@ -26,29 +26,29 @@ Or install it yourself as:
 
   1) Lists all the gems you own, just provide your rubygems handle
 
-	  Knowyourgems.name_of_your_gems “karanarora"
+    Knowyourgems.name_of_your_gems “karanarora"
 
       ==> ["hash_multi_tool", "knowyourgems"]
 
   2) Lists no. of gems you own, just provide your rubygems handle
 
-	  Knowyourgems.your_total_gems “karanarora"
+    Knowyourgems.your_total_gems “karanarora"
 
       ==> 2
 
-  3) Find when you updated your last gem:
+  3) Find when you updated your gem last:
 
     Knowyourgems.last_updated "hash_multi_tool"
 
       ==> "Awesome work you updated your gem 2 days before."
 
-  4) Find the popular version and basic info with downlaod counts
+  4) Find the most popular version of your gem:
 
     Knowyourgems.popular_version 'hash_multi_tool'
 
       ==> [{:version=>"0.1.5", :authors=>"Prabhat Thapa", :created_at=>"2015-07-08T00:00:00.000Z", :downloads_count=>195}]
 
-  5) Find the top 2 popular versions and with basic info
+  5) Find the top 2 popular versions of your gem:
 
     Knowyourgems.popular_version 'hash_multi_tool', 2
 
