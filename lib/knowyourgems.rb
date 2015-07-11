@@ -2,6 +2,8 @@ require "knowyourgems/version"
 require "net/http"
 require 'json'
 require 'time'
+require 'hash_multi_tool'
+require 'pry'
 
 module Knowyourgems
   class << self
@@ -36,9 +38,7 @@ module Knowyourgems
     end
 
     def last_updated gem
-      url = versions_api gem
-      response = http_response url
-      response, valid = valid_response? response
+      response, valid = versions_detail gem
       if valid
         date_diff = (DateTime.now - DateTime.parse(response.first['built_at'])).to_i
         if date_diff < 40
@@ -55,6 +55,16 @@ module Knowyourgems
 
     def gem_api user_handle
       "https://rubygems.org/api/v1/owners/#{user_handle}/gems.json"
+    end
+
+    def top_version gem
+      response, valid = versions_detail gem
+      if valid
+        sort_versions = HashMultiTool.sort_by_order response, [:downloads_count]
+        decorate_version_detail sort_versions
+      else
+        response
+      end
     end
 
     def versions_api gem
@@ -74,6 +84,24 @@ module Knowyourgems
         else
           {'error' => response.message}
       end
+    end
+
+    private 
+    def versions_detail gem
+      url = versions_api gem
+      response = http_response url
+      return valid_response? response
+    end
+
+    def decorate_version_detail versions = []
+      return [] if versions.count == 0
+      
+      {
+        version: versions[0]['number'],
+        authors: versions[0]['authors'],
+        created_at: versions[0]['built_at'],
+        downloads_count: versions[0]['downloads_count']
+      }
     end
 
   end

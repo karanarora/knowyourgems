@@ -5,3 +5,5 @@ gemspec
 
 gem 'webmock'
 gem 'timecop'
+gem 'hash_multi_tool'
+gem 'pry'
