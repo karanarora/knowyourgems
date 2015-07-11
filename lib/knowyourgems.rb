@@ -103,11 +103,11 @@ module Knowyourgems
         popular_versions = []
         0.upto(count -1) do |i|
           popular_versions << {
-            version: versions[0]['number'],
-            authors: versions[0]['authors'],
-            created_at: versions[0]['built_at'],
-            downloads_count: versions[0]['downloads_count']
-          }
+            version: versions[i]['number'],
+            authors: versions[i]['authors'],
+            created_at: versions[i]['built_at'],
+            downloads_count: versions[i]['downloads_count']
+          } unless versions[i].nil?
         end
         popular_versions
       else
