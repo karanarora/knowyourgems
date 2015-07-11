@@ -37,8 +37,8 @@ module Knowyourgems
       return response,valid
     end
 
-    def last_updated gem
-      response, valid = versions_detail gem
+    def last_updated gem_name
+      response, valid = versions_detail gem_name
       if valid
         date_diff = (DateTime.now - DateTime.parse(response.first['built_at'])).to_i
         if date_diff < 40
@@ -57,8 +57,8 @@ module Knowyourgems
       "https://rubygems.org/api/v1/owners/#{user_handle}/gems.json"
     end
 
-    def popular_versions gem, count = 1
-      response, valid = versions_detail gem
+    def popular_versions gem_name, count = 1
+      response, valid = versions_detail gem_name
       if valid
         sort_versions = HashMultiTool.sort_by_order response, [:downloads_count]
         decorate_version_detail sort_versions, count
@@ -83,8 +83,8 @@ module Knowyourgems
     end
 
     private
-    def versions_detail gem
-      url = versions_api gem
+    def versions_detail gem_name
+      url = versions_api gem_name
       response = http_response url
       return valid_response? response
     end
@@ -93,8 +93,8 @@ module Knowyourgems
       "https://rubygems.org/api/v1/owners/#{user_handle}/gems.json"
     end
 
-    def versions_api gem
-      "https://rubygems.org/api/v1/versions/#{gem}.json"
+    def versions_api gem_name
+      "https://rubygems.org/api/v1/versions/#{gem_name}.json"
     end
 
     def decorate_version_detail versions = [], count = 1
