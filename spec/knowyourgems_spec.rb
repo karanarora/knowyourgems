@@ -14,7 +14,7 @@ describe Knowyourgems do
         expect(Knowyourgems.name_of_your_gems 'karanarora').to eq(['hash_multi_tool'])
       end
     end
-
+  
     context "for user that does not exist" do
       it "should do something" do
         stub_request(:get, "https://rubygems.org/api/v1/owners/userthatdoesnotexist/gems.json").to_return(body: "Not found!", status: ["404", "Not Found"])
@@ -48,13 +48,13 @@ describe Knowyourgems do
 
   describe ".gem_api" do
     it "should return a url string as per user_handle" do
-      expect(Knowyourgems.gem_api 'karanarora').to eq("https://rubygems.org/api/v1/owners/karanarora/gems.json")
+      expect(Knowyourgems.send(:gem_api, 'karanarora')).to eq("https://rubygems.org/api/v1/owners/karanarora/gems.json")
     end
   end
 
   describe ".versions_api" do
     it "should return a url string as per user_handle" do
-      expect(Knowyourgems.versions_api 'hash_multi_tool').to eq("https://rubygems.org/api/v1/versions/hash_multi_tool.json")
+      expect(Knowyourgems.send(:versions_api, 'hash_multi_tool')).to eq("https://rubygems.org/api/v1/versions/hash_multi_tool.json")
     end
   end
 

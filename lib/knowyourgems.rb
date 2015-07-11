@@ -53,10 +53,6 @@ module Knowyourgems
       end
     end
 
-    def gem_api user_handle
-      "https://rubygems.org/api/v1/owners/#{user_handle}/gems.json"
-    end
-
     def top_version gem
       response, valid = versions_detail gem
       if valid
@@ -65,10 +61,6 @@ module Knowyourgems
       else
         response
       end
-    end
-
-    def versions_api gem
-      "https://rubygems.org/api/v1/versions/#{gem}.json"
     end
 
     def valid_response? response
@@ -86,7 +78,7 @@ module Knowyourgems
       end
     end
 
-    private 
+    private
     def versions_detail gem
       url = versions_api gem
       response = http_response url
@@ -95,13 +87,21 @@ module Knowyourgems
 
     def decorate_version_detail versions = []
       return [] if versions.count == 0
-      
+
       {
         version: versions[0]['number'],
         authors: versions[0]['authors'],
         created_at: versions[0]['built_at'],
         downloads_count: versions[0]['downloads_count']
       }
+    end
+
+    def gem_api user_handle
+      "https://rubygems.org/api/v1/owners/#{user_handle}/gems.json"
+    end
+
+    def versions_api gem
+      "https://rubygems.org/api/v1/versions/#{gem}.json"
     end
 
   end
