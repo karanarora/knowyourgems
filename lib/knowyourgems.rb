@@ -56,7 +56,7 @@ module Knowyourgems
     def popular_versions gem_name, count = 1
       response, valid = versions_detail gem_name
       if valid
-        sort_versions = HashMultiTool.sort_by_order response, [:downloads_count]
+        sort_versions = HashMultiTool.sort_by_order response, ['downloads_count'], "DESC"
         decorate_version_detail sort_versions, count
       else
         response
