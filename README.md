@@ -40,7 +40,13 @@ Or install it yourself as:
 
     Knowyourgems.last_updated "hash_multi_tool"
 
-      ==> "2 days"
+      ==> "Awesome work you updated your gem 2 days before."
+
+  4) Find the top version and basic info with downlaod counts
+
+    Knowyourgems.top_version 'hash_multi_tool'
+
+      ==> {:version=>"0.1.5", :authors=>"Prabhat Thapa", :created_at=>"2015-07-08T00:00:00.000Z", :downloads_count=>195}
 
 ## Development
 
