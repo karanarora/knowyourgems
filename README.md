@@ -26,19 +26,19 @@ Or install it yourself as:
 
   1) Lists all the gems you own, just provide your rubygems handle
 
-    Knowyourgems.name_of_your_gems “karanarora"
+    Knowyourgems.name_of_your_gems 'karanarora'
 
       ==> ["hash_multi_tool", "knowyourgems"]
 
   2) Lists no. of gems you own, just provide your rubygems handle
 
-    Knowyourgems.your_total_gems “karanarora"
+    Knowyourgems.your_total_gems 'karanarora'
 
       ==> 2
 
   3) Find when you updated your gem last:
 
-    Knowyourgems.last_updated "hash_multi_tool"
+    Knowyourgems.last_updated 'hash_multi_tool'
 
       ==> "Awesome work you updated your gem 2 days before."
 
