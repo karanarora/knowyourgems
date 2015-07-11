@@ -42,7 +42,7 @@ Or install it yourself as:
 
       ==> "Awesome work you updated your gem 2 days before."
 
-  4) Find the top version and basic info with downlaod counts
+  4) Most popular version for your gem:
 
     Knowyourgems.top_version 'hash_multi_tool'
 
