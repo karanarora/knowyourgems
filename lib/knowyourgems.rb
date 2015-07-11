@@ -53,11 +53,15 @@ module Knowyourgems
       end
     end
 
-    def top_version gem
+    def gem_api user_handle
+      "https://rubygems.org/api/v1/owners/#{user_handle}/gems.json"
+    end
+
+    def popular_versions gem, count = 1
       response, valid = versions_detail gem
       if valid
         sort_versions = HashMultiTool.sort_by_order response, [:downloads_count]
-        decorate_version_detail sort_versions
+        decorate_version_detail sort_versions, count
       else
         response
       end
@@ -85,17 +89,6 @@ module Knowyourgems
       return valid_response? response
     end
 
-    def decorate_version_detail versions = []
-      return [] if versions.count == 0
-
-      {
-        version: versions[0]['number'],
-        authors: versions[0]['authors'],
-        created_at: versions[0]['built_at'],
-        downloads_count: versions[0]['downloads_count']
-      }
-    end
-
     def gem_api user_handle
       "https://rubygems.org/api/v1/owners/#{user_handle}/gems.json"
     end
@@ -104,6 +97,22 @@ module Knowyourgems
       "https://rubygems.org/api/v1/versions/#{gem}.json"
     end
 
+    def decorate_version_detail versions = [], count = 1
+      count = count.to_i
+      if (versions.count != 0 || count > 0)
+        popular_versions = []
+        0.upto(count -1) do |i|
+          popular_versions << {
+            version: versions[0]['number'],
+            authors: versions[0]['authors'],
+            created_at: versions[0]['built_at'],
+            downloads_count: versions[0]['downloads_count']
+          }
+        end
+        popular_versions
+      else
+        []
+      end
+    end
   end
-
 end

@@ -42,11 +42,20 @@ Or install it yourself as:
 
       ==> "Awesome work you updated your gem 2 days before."
 
-  4) Most popular version for your gem:
+  4) Find the popular version and basic info with downlaod counts
 
-    Knowyourgems.top_version 'hash_multi_tool'
+    Knowyourgems.popular_version 'hash_multi_tool'
 
-      ==> {:version=>"0.1.5", :authors=>"Prabhat Thapa", :created_at=>"2015-07-08T00:00:00.000Z", :downloads_count=>195}
+      ==> [{:version=>"0.1.5", :authors=>"Prabhat Thapa", :created_at=>"2015-07-08T00:00:00.000Z", :downloads_count=>195}]
+
+  5) Find the top 2 popular versions and with basic info
+
+    Knowyourgems.popular_version 'hash_multi_tool', 2
+
+      ==> [
+            {:version=>"0.1.5", :authors=>"Prabhat Thapa", :created_at=>"2015-07-08T00:00:00.000Z", :downloads_count=>195},
+            {:version=>"0.1.5", :authors=>"Prabhat Thapa", :created_at=>"2015-07-08T00:00:00.000Z", :downloads_count=>195}
+          ]
 
 ## Development
 
