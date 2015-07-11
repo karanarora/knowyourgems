@@ -40,7 +40,14 @@ module Knowyourgems
       response = http_response url
       response, valid = valid_response? response
       if valid
-        ((DateTime.now - DateTime.parse(response.first['built_at'])).to_i).to_s + ' days'
+        date_diff = (DateTime.now - DateTime.parse(response.first['built_at'])).to_i
+        if date_diff < 40
+          "Awesome work you updated your gem #{date_diff} days before."
+        elsif (40 < date_diff && date_diff < 100)
+          "Your gem would like an update, it was updated #{date_diff} days ago."
+        elsif date_diff > 100
+          "Ohh man your gem is lagging behind. Was last updated #{date_diff} days back."
+        end
       else
         response
       end
