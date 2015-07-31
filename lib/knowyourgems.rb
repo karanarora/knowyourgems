@@ -9,7 +9,7 @@ module Knowyourgems
   class << self
     def name_of_your_gems(user_handle)
       response, valid = gems_api_common(user_handle)
-      valid ? response : response.collect!{|r| r['name']}
+      valid ? response.collect!{|r| r['name']} : response
     end
 
     def your_total_gems(user_handle)
