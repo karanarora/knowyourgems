@@ -7,63 +7,58 @@ require 'pry'
 
 module Knowyourgems
   class << self
-    def name_of_your_gems user_handle
-      response, valid = gems_api_common user_handle
-      if valid
-        response.collect!{|r| r['name']}
-      else
-        response
-      end
+    def name_of_your_gems(user_handle)
+      response, valid = gems_api_common(user_handle)
+      valid ? response.collect!{|r| r['name']} : response
     end
 
-    def your_total_gems user_handle
-      response, valid = gems_api_common user_handle
-      if valid
-        response.count
-      else
-        response
-      end
+    def your_total_gems(user_handle)
+      response, valid = gems_api_common(user_handle)
+      valid ? response.count : response
     end
 
-    def http_response service
+    def http_response(service)
       uri = URI(service)
       response = Net::HTTP.get_response(uri)
     end
 
-    def gems_api_common user_handle
-      url = gem_api user_handle
-      response = http_response url
-      response, valid = valid_response? response
-      return response,valid
+    def gems_api_common(user_handle)
+      url = gem_api(user_handle)
+      response = http_response(url)
+      valid_response?(response)
     end
 
     def last_updated gem_name
-      response, valid = versions_detail gem_name
+      response, valid = versions_detail(gem_name)
       if valid
         date_diff = (DateTime.now - DateTime.parse(response.first['built_at'])).to_i
-        if date_diff < 40
-          "Awesome work you updated your gem #{date_diff} days before."
-        elsif (40 < date_diff && date_diff < 100)
-          "Your gem would like an update, it was updated #{date_diff} days ago."
-        elsif date_diff > 100
-          "Ohh man your gem is lagging behind. Was last updated #{date_diff} days back."
-        end
+        status_message(date_diff)
       else
         response
       end
     end
+    
+    def status_message(date_diff)
+      if date_diff < 40
+        "Awesome ! Gem updated #{date_diff} days ago."
+      elsif (40 < date_diff && date_diff < 100)
+        "Update needed ! Last update #{date_diff} days ago."
+      elsif date_diff > 100
+        "Ouch ! Last updated #{date_diff} days back."
+      end  
+    end
 
-    def popular_versions gem_name, count = 1
+    def popular_versions(gem_name, count = 1)
       response, valid = versions_detail gem_name
       if valid
         sort_versions = HashMultiTool.sort_by_order response, ['downloads_count'], "DESC"
-        decorate_version_detail sort_versions, count
+        decorate_version_detail(sort_versions, count)
       else
         response
       end
     end
 
-    def valid_response? response
+    def valid_response?(response)
       case response
         when Net::HTTPSuccess || Net::HTTPOK
           return (JSON.parse response.body), true
@@ -79,10 +74,11 @@ module Knowyourgems
     end
 
     private
-    def versions_detail gem_name
-      url = versions_api gem_name
-      response = http_response url
-      return valid_response? response
+    
+    def versions_detail(gem_name)
+      url = versions_api(gem_name)
+      response = http_response(url)
+      valid_response?(response)
     end
 
     def gem_api user_handle
